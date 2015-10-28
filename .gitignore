@@ -33,4 +33,6 @@ tmp
 .ruby-version
 .ruby-gemset
 *~
+# Added these files to not force other to use them.
 .rvmrc
+.overcommit.yml
