@@ -17,7 +17,7 @@ RSpec.describe 'i18n-tasks' do
             proc {
               out, err, status = Open3.capture3(env, 'bundle exec ../../bin/i18n-tasks')
               expect(status).to be_success
-              expect(out).to be_empty
+              expect(out.sub(/\ACoverage =.*$\n/, '')).to be_empty
               expect(err).to start_with('Usage: i18n-tasks [command] [options]')
               expect(err).to include('Available commands', 'add-missing')
               # a task from a plugin
@@ -27,7 +27,7 @@ RSpec.describe 'i18n-tasks' do
               out, err, status = Open3.capture3(env, 'bundle exec ../../bin/i18n-tasks --version')
               expect(status).to be_success
               expect(err).to be_empty
-              expect(out.chomp).to eq I18n::Tasks::VERSION
+              expect(out.chomp.sub(/\ACoverage =.*$\n/, '')).to eq I18n::Tasks::VERSION
             }
         ].map { |test| Thread.start(&test) }.each(&:join)
       end
